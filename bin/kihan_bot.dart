@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:math';
+import 'questions/good_manners.dart';
 import 'questions/time_questions.dart';
 import 'timing/waiting_time.dart';
 
@@ -10,9 +11,9 @@ void main() async {
 
   var myStream = BotClock().kihanBotStream(1, 10);
   var subscriber = myStream.listen((event) {
-    print("                       Kihanbot is actived for $event seconds");
+    print("                       Kihanbot está ativo por $event segundos");
   }, onDone: (){
-    print("KihanBot is finishing its work, ask the last question");
+    print("KihanBot está sendo finalizado! Faça a ultima pergunta");
     a = false;
   });
 
@@ -33,9 +34,12 @@ void main() async {
       // verificar antes, assim não fazemos toda a função sem precisar.
       await BotClock().clock(1);
       TimeQuestions(usuario).timeQuestion();
-    } else if (false) {
+    } else if (GoodManners(usuario).isThisManners()) {
+      GoodManners(usuario).goodManners();
+    }else if (false) {
       //Basta adicionar novas perguntas aqui!
-    } else {
+    }
+    else {
       await BotClock().clock(3);
       print(kihanBot +
           ' Não fui treinado para responder a essa pergunta \n Desculpe :( ');
